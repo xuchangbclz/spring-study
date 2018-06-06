@@ -1,10 +1,10 @@
-在bean准备就绪之前， bean工厂执行了若干启动步骤。
-我们对图1.5进行详细描述：
-1． Spring对bean进行实例化；
-2． Spring将值和bean的引用注入到bean对应的属性中；
-3． 如果bean实现了BeanNameAware接口， Spring将bean的ID传递给
+###Spring Bean生命周期
+在bean准备就绪之前， bean工厂执行了若干启动步骤：
+1. Spring对bean进行实例化；
+2. Spring将值和bean的引用注入到bean对应的属性中；
+3. 如果bean实现了BeanNameAware接口， Spring将bean的ID传递给
 setBean-Name()方法；
-4． 如果bean实现了BeanFactoryAware接口， Spring将调
+4. 如果bean实现了BeanFactoryAware接口， Spring将调
 用setBeanFactory()方法， 将BeanFactory容器实例传入；
 5． 如果bean实现了ApplicationContextAware接口， Spring将调
 用setApplicationContext()方法， 将bean所在的应用上下文的
