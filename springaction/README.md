@@ -1,4 +1,4 @@
-###Spring Bean生命周期
+### Spring Bean生命周期
 在bean准备就绪之前， bean工厂执行了若干启动步骤：
 1. Spring对bean进行实例化；
 2. Spring将值和bean的引用注入到bean对应的属性中；
