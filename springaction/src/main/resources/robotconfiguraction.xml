@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		 xsi:schemaLocation="http://www.springframework.org/schema/beans   
+          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/aop   
+          http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	
+	
+	
+	<bean id="raction" class="springaction.robot.RobotAction">
+		<constructor-arg ref="caction" />
+	</bean>
+	
+	<bean id="caction" class="springaction.robot.CleanAction">
+		<constructor-arg value="#{T(System).out}" />
+	</bean>
+	
+	<bean id="alog" class="springaction.robot.Log">
+		<constructor-arg value="#{T(System).out}"></constructor-arg>
+	</bean>
+	
+	<aop:config>
+		<aop:aspect ref="alog">
+			<aop:pointcut id="excuaction" expression="execution(* springaction..*.*(..))" />
+			<aop:before method="excuBefore" pointcut-ref="excuaction"/>
+			<aop:after method="excuAfter" pointcut-ref="excuaction"/>	
+		</aop:aspect>
+	</aop:config>
+	
+	
+
+</beans>
