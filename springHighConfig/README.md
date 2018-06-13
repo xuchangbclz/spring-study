@@ -12,17 +12,17 @@
   会创建某个bean
   @Conditional将会通过Condition接口进行条件对比,接口有两个参数ConditionContext,AnnotatedTypeMetadata
   
-  * 通过ConditionContext， 我们可以做到如下几点：
-  借助getRegistry()返回的BeanDefinitionRegistry检查
-  bean定义；
-  借助getBeanFactory()返回的
-  ConfigurableListableBeanFactory检查bean是否存在，
-  甚至探查bean的属性；
-  借助getEnvironment()返回的Environment检查环境变量
-  是否存在以及它的值是什么；
-  读取并探查getResourceLoader()返回的ResourceLoader
-  所加载的资源；
-  借助getClassLoader()返回的ClassLoader加载并检查类
-  是否存在。
-  * AnnotatedTypeMetadata则能够让我们检查带有@Bean注解的方
-  法上还有什么其他的注解。
+	  * 通过ConditionContext， 我们可以做到如下几点：
+	  借助getRegistry()返回的BeanDefinitionRegistry检查
+	  bean定义；
+	  借助getBeanFactory()返回的
+	  ConfigurableListableBeanFactory检查bean是否存在，
+	  甚至探查bean的属性；
+	  借助getEnvironment()返回的Environment检查环境变量
+	  是否存在以及它的值是什么；
+	  读取并探查getResourceLoader()返回的ResourceLoader
+	  所加载的资源；
+	  借助getClassLoader()返回的ClassLoader加载并检查类
+	  是否存在。
+	  * AnnotatedTypeMetadata则能够让我们检查带有@Bean注解的方
+	  法上还有什么其他的注解。
