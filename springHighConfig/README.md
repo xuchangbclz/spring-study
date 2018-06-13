@@ -26,3 +26,16 @@
 	  是否存在。
 	  * AnnotatedTypeMetadata则能够让我们检查带有@Bean注解的方
 	  法上还有什么其他的注解。
+  @profile的实现也是基于Condition接口实现，通过AnnotatedTypeMetadata读取注解的value判断
+
+3. 自动装配的歧义性  @Primary和@Qualifier
+  解决问题：当确实发生歧义性的时候， Spring提供了多种可选方案来解决
+  这样的问题。 你可以将可选bean中的某一个设为首选（primary） 的
+ bean， 或者使用限定符（qualifier） 来帮助Spring将可选的bean的范围
+  缩小到只有一个bean。
+	  * 通过@Primary设置首选， 但@Primary无法将可选方案的范围限定到
+	   唯一一个无歧义性的选项中。
+	  * 通过@Qualifier 与之相反， Spring的限定符能够在所有可选的bean上进行缩小范围的
+	  操作， 最终能够达到只有一个bean满足所规定的限制条件。 如果将所
+	  有的限定符都用上后依然存在歧义性， 那么你可以继续使用更多的限
+	  定符@Qualifier来缩小选择范围。
