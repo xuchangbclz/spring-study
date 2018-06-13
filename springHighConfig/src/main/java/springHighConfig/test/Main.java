@@ -15,6 +15,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Import;
 
+import springHighConfig.config.ConditionBeanConfig;
 import springHighConfig.config.Config;
 
 /**  
@@ -24,7 +25,7 @@ import springHighConfig.config.Config;
 * @date 2018年6月8日  
 */
 @Configurable
-@Import(value=Config.class)
+@Import(value= {Config.class,ConditionBeanConfig.class})
 public class Main {
 		
 	

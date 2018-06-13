@@ -23,18 +23,16 @@ import springHighConfig.test.Person;
 * @date 2018年6月8日  
 */
 
-@Configurable
-@ComponentScan("springHighConfig")
 public class Config {
 	
-	@Bean("pname")
+	@Bean
 	@Profile("dev")
 	public Person printStream_dev() {
 		
-		return new Person("我是开发");
+		return new Person("我是开发1");
 	}
 	
-	@Bean("pname")
+	@Bean
 	@Profile("pro")
 	public Person printStream2_pro() {
 		
