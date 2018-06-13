@@ -12,7 +12,7 @@
   会创建某个bean
   @Conditional将会通过Condition接口进行条件对比,接口有两个参数ConditionContext,AnnotatedTypeMetadata
   
-  *通过ConditionContext， 我们可以做到如下几点：
+  * 通过ConditionContext， 我们可以做到如下几点：
   借助getRegistry()返回的BeanDefinitionRegistry检查
   bean定义；
   借助getBeanFactory()返回的
@@ -24,5 +24,5 @@
   所加载的资源；
   借助getClassLoader()返回的ClassLoader加载并检查类
   是否存在。
-  *AnnotatedTypeMetadata则能够让我们检查带有@Bean注解的方
+  * AnnotatedTypeMetadata则能够让我们检查带有@Bean注解的方
   法上还有什么其他的注解。
