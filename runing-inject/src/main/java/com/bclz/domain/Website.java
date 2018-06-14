@@ -25,6 +25,9 @@ public class Website {
 	@Value("${wbsite.URL}")
 	private String URL;
 	
+	@Value("#{website.getURL()+'AAA'}")
+	private String spEl;
+	
 	@Value("${wbsite.description}")
 	private String description;
 
@@ -54,6 +57,20 @@ public class Website {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the spEl
+	 */
+	public String getSpEl() {
+		return spEl;
+	}
+
+	/**
+	 * @param spEl the spEl to set
+	 */
+	public void setSpEl(String spEl) {
+		this.spEl = spEl;
 	}
 	
 	

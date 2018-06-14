@@ -46,6 +46,7 @@ public class PropertyHoldApp {
 		//指定文件值里的类型，若无此属性，会取默认值
 		System.out.println(env.getProperty("asasasasasa", Integer.class,2));
 		System.out.println((ac.getBean(Website.class)).getURL());
+		System.out.println((ac.getBean(Website.class)).getSpEl());
 	}
 	
 	//开启使用占位符配置
