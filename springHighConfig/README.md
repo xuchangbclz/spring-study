@@ -39,3 +39,66 @@
 	  操作， 最终能够达到只有一个bean满足所规定的限制条件。 如果将所
 	  有的限定符都用上后依然存在歧义性， 那么你可以继续使用更多的限
 	  定符@Qualifier来缩小选择范围。
+4. bean的作用域
+   在默认情况下， Spring应用上下文中所有bean都是作为以单例
+（singleton） 的形式创建的。
+   有时候， 可能会发现， 你所使用的类是易变的（mutable） ， 它们会保
+持一些状态， 因此重用是不安全的。在这种情况下， 将class声明为单
+例的bean就不是什么好主意了， 
+Spring定义了多种作用域， 可以基于这些作用域创建bean， 包括：
+* 单例（Singleton） ： 在整个应用中， 只创建bean的一个实例。
+* 原型（Prototype） ： 每次注入或者通过Spring应用上下文获取的
+时候， 都会创建一个新的bean实例。
+* 会话（Session） ： 在Web应用中， 为每个会话创建一个bean实
+例。
+* 请求（Rquest） ： 在Web应用中， 为每个请求创建一个bean实
+例。
+1. 单例和原型
+```
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class Test {...}
+
+或者在方法中
+//ConfigurableBeanFactory.SCOPE_PROTOTYPE或者直接写"prototype",前者是spring定义的原型作用域。
+//定义了两个作用域ConfigurableBeanFactory.SCOPE_SINGLETON和ConfigurableBeanFactory.SCOPE_PROTOTYPE
+@Bean
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public Test test() {
+	return new Test();
+}
+
+```
+2.使用会话和请求作用域
+在Web应用中， 如果能够实例化在会话和请求范围内共享的bean， 那
+将是非常有价值的事情。 例如， 在典型的电子商务应用中， 可能会有
+一个bean代表用户的购物车。 就购物车bean来说， 会话作用域是最为合适的，
+```
+//WebApplicationContext.SCOPE_SESSION="session"
+//"session"这会告诉Spring为Web应用中的每个会话创建一个ShoppingCart。
+@Component
+@Scope(
+    value=WebApplicationContext.SCOPE_SESSION,
+    proxyMode=ScopedProxyMode.INTERFACES)
+public ShoppingCart cart() {...}
+
+
+@Component
+public class StoreService{
+	@Autowired
+	private ShoppingCart cart
+
+}
+```
+proxyMode解决的问题:
+有如下场景:因为StoreService是一个单例的bean， 会在Spring应用上下文加载的时候创建。
+当它创建的时候， Spring会试图将ShoppingCart bean注入，
+但是ShoppingCart bean是会话作用域的， 此时并不存在。 直到某个用户进入系统， 创建了会话之后， 才会出现ShoppingCart实例。
+系统中将会有多个ShoppingCart实例： 每个用户一个。购物车随着用户的变化而变化而不是固定的;
+
+因此，在这里Spring并不会将实际的ShoppingCart bean注入到StoreService中，Spring会注入一个到ShoppingCart bean的代理，
+这个代理会暴露与ShoppingCart相同的方法， 所以StoreService会认为它就是一个购物车。 但是， 当StoreService调用ShoppingCart的方法时， 
+代理会对其进行懒解析并将调用委托给会话作用域内真正的ShoppingCart bean。
+如配置所示， proxyMode属性被设置成了ScopedProxyMode.INTERFACES， 这表明这个代理要实现ShoppingCart接口， 并将调用委托给实现bean。
+接口代理是最理想的方式，但如果ShoppingCart是具体的类，此时， 它必须使用CGLib来生成基于类的代理。
+要将proxyMode属性设置为ScopedProxyMode.TARGET_CLASS， 以此来表明要以生成目标类扩展的方式创建代理。
