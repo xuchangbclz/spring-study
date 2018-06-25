@@ -7,7 +7,7 @@
 * @date 2018年6月21日  
 * @version 1.0  
 */  
-package aspect;
+package aspect.execution;
 
 import org.springframework.stereotype.Component;
 
@@ -26,6 +26,17 @@ public class Working {
 		
 		System.out.println("开始工作...");
 		/*throw new Exception();*/
+	}
+	
+	/**
+	 * 
+	 * Title: robotOutFileNum 
+	 * Description:机器人传递文件  
+	 * @param count
+	 */
+	public void robotOutFileNum(int count) {
+		
+		System.out.println("传递"+count+"个文件");
 	}
 	
 }

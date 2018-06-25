@@ -7,7 +7,7 @@
 * @date 2018年6月21日  
 * @version 1.0  
 */  
-package aspect;
+package aspect.execution;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -28,6 +28,8 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class Robot {
 	
+	private int current=0;
+	
 	/**
 	 * 
 	 * Title: pointcut 
@@ -36,6 +38,29 @@ public class Robot {
 	@Pointcut("execution(* aspect.Working.perform(..))")
 	public void pointcut() {};
 	
+	/**
+	 * 
+	 * Title: argsExe 
+	 * Description:定义切面传参  
+	 * @param count
+	 */
+	@Pointcut("execution(* aspect.Working.robotOutFileNum(int)) && args(count)")
+	public void argsExe(int count) {};
+	
+	@Before("argsExe(count)")
+	public void getCount(int count) {
+		
+		System.out.println("已经有"+(current+=count));
+		
+	}
+	
+	/**
+	 * 
+	 * Title: roundAdvice 
+	 * Description:环绕通知  ProceedingJoinPoint
+	 * @param pt
+	 * @throws Throwable
+	 */
 	@Around("pointcut()")
 	public void roundAdvice(ProceedingJoinPoint pt) throws Throwable {
 		System.out.println("语音助手Working...");

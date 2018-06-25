@@ -16,6 +16,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
+import aspect.execution.Robot;
+import aspect.execution.Working;
+
 /**  
 * Title: App
 * Description: @EnableAspectJAutoProxy开启自动代理功能
@@ -33,6 +36,8 @@ public class App {
 		ApplicationContext app=new AnnotationConfigApplicationContext(App.class);
 		Working w=app.getBean(Working.class);
 		w.perform();
+		w.robotOutFileNum(5);
+		w.robotOutFileNum(6);
 		
 	}
 	
