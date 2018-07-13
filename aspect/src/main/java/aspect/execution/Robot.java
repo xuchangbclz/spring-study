@@ -35,7 +35,7 @@ public class Robot {
 	 * Title: pointcut 
 	 * Description:定义可重用切点,避免相同execution重复写
 	 */
-	@Pointcut("execution(* aspect.Working.perform(..))")
+	@Pointcut("execution(* aspect.execution.Working.perform(..))")
 	public void pointcut() {};
 	
 	/**
@@ -44,7 +44,7 @@ public class Robot {
 	 * Description:定义切面传参  
 	 * @param count
 	 */
-	@Pointcut("execution(* aspect.Working.robotOutFileNum(int)) && args(count)")
+	@Pointcut("execution(* aspect.execution.Working.robotOutFileNum(int)) && args(count)")
 	public void argsExe(int count) {};
 	
 	@Before("argsExe(count)")
@@ -73,7 +73,7 @@ public class Robot {
 	 * Title: prepareTool 
 	 * Description:执行之前
 	 */
-	@Before("execution(* aspect.Working.perform(..))")
+	@Before("execution(* aspect.execution.Working.perform(..))")
 	public void prepareTool() {
 		System.out.println("准备Working...");
 		
@@ -84,7 +84,7 @@ public class Robot {
 	 * Title: afterWork 
 	 * Description:正常返回或者异常执行
 	 */
-	@After("execution(* aspect.Working.perform(..))")
+	@After("execution(* aspect.execution.Working.perform(..))")
 	public void afterWork() {
 		System.out.println("放松1...");
 		
@@ -95,7 +95,7 @@ public class Robot {
 	 * Title: afterWork2 
 	 * Description:正常返回后执行
 	 */
-	@AfterReturning("execution(* aspect.Working.perform(..))")
+	@AfterReturning("execution(* aspect.execution.Working.perform(..))")
 	public void afterWork2() {
 		System.out.println("放松2...");
 		
@@ -106,7 +106,7 @@ public class Robot {
 	 * Title: errorWork 
 	 * Description:抛出异常后执行
 	 */
-	@AfterThrowing("execution(* aspect.Working.perform(..))")
+	@AfterThrowing("execution(* aspect.execution.Working.perform(..))")
 	public void errorWork() {
 		System.out.println("工作错误...");
 		

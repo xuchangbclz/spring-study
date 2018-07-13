@@ -18,6 +18,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import aspect.execution.Robot;
 import aspect.execution.Working;
+import aspect.injectNewFunction.TielineUsbInterface;
+import aspect.injectNewFunction.Usb;
+import aspect.injectNewFunction.UsbInterface;
+import aspect.injectNewFunction.aspect.ProxyBeanConfig;
 
 /**  
 * Title: App
@@ -39,6 +43,10 @@ public class App {
 		w.robotOutFileNum(5);
 		w.robotOutFileNum(6);
 		
+		System.out.println("通过转接线连接usb...");
+		UsbInterface s=app.getBean(UsbInterface.class);
+		((TielineUsbInterface)s).tielineUsbInterface();
+		s.openInterface();
 	}
 	
 	/**
@@ -50,6 +58,17 @@ public class App {
 	@Bean
 	public Robot getRobot() {
 		return new Robot();
+	}
+	
+	/**
+	 * 
+	 * Title: getRobot 
+	 * Description:  注入代理配置
+	 * @return
+	 */
+	@Bean
+	public ProxyBeanConfig geProxyBeanConfig() {
+		return new ProxyBeanConfig();
 	}
 	
 	
