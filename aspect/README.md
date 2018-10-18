@@ -25,14 +25,19 @@
 
 任意公共方法的执行：
 execution(public * *(..))
+
 任何一个以“set”开始的方法的执行：
 execution(* set*(..))
+
 AccountService 接口的任意方法的执行：
 execution(* com.xyz.service.AccountService.*(..))
+
 定义在service包里的任意方法的执行：
 execution(* com.xyz.service.*.*(..))
+
 定义在service包和所有子包里的任意类的任意方法的执行：
 execution(* com.xyz.service..*.*(..))
+
 定义在pointcutexp包和所有子包里的JoinPointObjP2类的任意方法的执行：
 execution(* com.test.spring.aop.pointcutexp..JoinPointObjP2.*(..))")
 
