@@ -14,34 +14,21 @@
 4. Aspect(通知和切点共同组成)
 5. Introduction（引入）
 6. Weaving(织入)
+
 ```
- execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern)  throws-pattern?)
-　　　　ret-type-pattern,name-pattern(param-pattern)是必须的.
-　　　　ret-type-pattern:标识方法的返回值，需要使用全路径的类名如java.lang.String,也可以为*表示任何返回值；
-　　　　name-pattern:指定方法名,*代表所有,例如set*,代表以set开头的所有方法.
-　　　　param-pattern:指定方法参数(声明的类型),(..)代表所有参数,(*)代表一个参数,(*,String)代表第一个参数为任何值,第二个为String类型.
+execution(* com.loongshawn.method.ces..*.*(..))
 ```
-表达式例子如下：
+注意：markdown中符号“*”是加粗，因此输出“*”符号需要进行转义“*”。
 
-任意公共方法的执行：
-execution(public * *(..))
+  表达式结构解释如下：
+标识符 | 含义
+---|---
+execution() | 表达式的主体
+第一个“\*”符号 | 表示返回值的类型任意
+com.loongshawn.method.ces |	AOP所切的服务的包名，即，需要进行横切的业务类
+包名后面的“..” |	表示当前包及子包
+第二个“\*”	 | 表示类名，*即所有类
+.*(..)	| 表示任何方法名，括号表示参数，两个点表示任何参数类型
+	
+	
 
-任何一个以“set”开始的方法的执行：
-execution(* set*(..))
-
-AccountService 接口的任意方法的执行：
-execution(* com.xyz.service.AccountService.*(..))
-
-定义在service包里的任意方法的执行：
-execution(* com.xyz.service.*.*(..))
-
-定义在service包和所有子包里的任意类的任意方法的执行：
-execution(* com.xyz.service..*.*(..))
-
-定义在pointcutexp包和所有子包里的JoinPointObjP2类的任意方法的执行：
-execution(* com.test.spring.aop.pointcutexp..JoinPointObjP2.*(..))")
-
-在多个表达式之间使用 ||,or表示 或，使用 &&,and表示 与，！表示 非.例如：
-```
-(execution(* com.ccboy.dao..*.find*(..))) or (execution(* com.ccboy.dao..*.query*(..)))
-```
